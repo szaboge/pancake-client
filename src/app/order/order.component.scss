@@ -1,0 +1,45 @@
+.card{
+  max-width: 31.250rem;
+  width: 100%;
+}
+
+.main{
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}
+.order-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.order-button{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.loading{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.loading-icon{
+  font-size: 24px;
+}
+
+.chooser{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  margin-top: 6px;
+}
+
+.left{
+  margin-right: 12px;
+}

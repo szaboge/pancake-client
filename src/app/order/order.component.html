@@ -1,0 +1,30 @@
+<div class="main">
+  <mat-card class="card">
+    <mat-card-title>
+      Rendelés
+    </mat-card-title>
+    <form class="order-form" [formGroup]="form">
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="name" name="name" placeholder="Név" formControlName="name" >
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="room" placeholder="Szobaszám" name="room" formControlName="room">
+      </mat-form-field>
+      <div class="chooser">
+        <mat-radio-group [value]="1" formControlName="type" (change)="matgroup(radioGroup.value)" #radioGroup>
+          <mat-radio-button class="left" [checked]="true" color="primary" value="1">Sima</mat-radio-button>
+          <mat-radio-button color="primary" value="2">Laktózmentes</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <app-pancake-object [item]="item" *ngFor="let item of pancakes"></app-pancake-object>
+      <div class="loading"><span *ngIf="pancakeloading" class="mdi mdi-loading mdi-spin loading-icon"></span></div>
+      <div class="order-button">
+        <button mat-button color="primary" type="button" routerLink="/main">Vissza</button>
+        <button mat-raised-button color="primary" type="button" (click)="reserve()" [disabled]="!form.valid || !validateNumbers() || loading">
+          Rendelés
+          <span *ngIf="loading" class="mdi mdi-loading mdi-spin loading-icon"></span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,59 @@
+.main{
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}
+
+.main-content{
+  max-width: 31.250rem;
+  width: 100%;
+}
+.start-button-container{
+  margin-top: 1.250rem;
+  display: flex;
+  justify-content: center;
+}
+.title-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.title-name{
+  width: 70%;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.indicator{
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.inprogress {
+  color: #ff6f00;
+  font-size: 26px;
+}
+
+.done {
+  color: #2e7d32;
+  font-size: 26px;
+  float: right;
+}
+.pancakes{
+  padding: 16px 0 8px;
+}
+.db-container{
+  margin-right: 6px;
+  height: 18px;
+}
+::ng-deep span.mat-content{
+  display: block;
+}
+
+.time-container{
+  display: flex;
+  width: 100%;
+}

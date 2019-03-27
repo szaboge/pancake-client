@@ -1,0 +1,39 @@
+<div class="main">
+  <div class="main-content">
+    <h2>Rendelések <span class="mdi mdi-loading mdi-spin" *ngIf="loading"></span></h2>
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel *ngFor="let item of reservations | keyvalue">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="title-content">
+              <div class="title-name">{{item.value.name}} - {{item.value.room}}</div>
+              <div class="indicator">
+                <div class="db-container">
+                  <span>
+                    {{count(item.value.pancakes)}} db
+                  </span>
+                </div>
+                <span *ngIf="item.value.done" class="mdi mdi-check-circle done"></span>
+                <span *ngIf="!item.value.done" class="mdi mdi-sync inprogress"></span>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        {{item.value.time}} - {{item.value.done ? 'Kész' : 'Folyamatban'}}
+        <div class="pancakes">
+          <mat-chip-list>
+            <mat-chip *ngFor="let pancake of item.value.pancakes">
+              {{pancake.name}}: {{pancake.piece}} db
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-card *ngIf="!reservations" class="card">
+      Nincs aktív rendelésed
+    </mat-card>
+    <div class="start-button-container">
+      <button mat-raised-button color="primary" routerLink="/order">Új rendelés leadása</button>
+    </div>
+  </div>
+</div>

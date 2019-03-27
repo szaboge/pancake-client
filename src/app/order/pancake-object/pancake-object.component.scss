@@ -1,0 +1,62 @@
+.main-container {
+  width: 100%;
+  display: flex;
+  border-radius: 1000px;
+  margin-bottom: 0.500rem;
+  border: #EEEEEE 1px solid;
+}
+
+.name-field {
+  display: flex;
+  align-items: center;
+  padding-left: 0.750rem;
+  width: 50%;
+  background-color: #eee;
+  border-bottom-left-radius: 1000px;
+  border-top-left-radius: 1000px;
+}
+
+.db-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  background-color: #eee;
+  overflow: hidden;
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+}
+
+.room-number {
+  text-align: center;
+  line-height: 18px;
+  font-size: 16px;
+  padding: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+}
+
+.input-field{
+  width: 30%;
+  height: 38px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #F5F5F5;
+}
+
+.icon_size{
+  font-size: 24px;
+  color: #616161;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
