@@ -1,0 +1,48 @@
+<div class="main">
+  <div class="main-content">
+    <button mat-flat-button color="primary" type="button" routerLink="/main">
+      Vissza
+    </button>
+    <h2>Összes rendelés</h2>
+    <div class="statistics">
+      <mat-chip-list>
+        <mat-chip>
+          Összes: {{all}}
+        </mat-chip>
+        <mat-chip class="done-chip">
+          Kész: {{donee}}
+        </mat-chip>
+        <mat-chip class="inprogress-chip">
+          Folyamatban: {{inprogress}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel *ngFor="let item of reservations | keyvalue;let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="title-content">
+              <div class="title-name">{{i+1}}. {{item.value.name}} - {{item.value.room}}</div>
+              <div class="indicator">
+                <span *ngIf="item.value.done" class="mdi mdi-check-circle done"></span>
+                <span *ngIf="!item.value.done" class="mdi mdi-sync inprogress"></span>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="time">{{item.value.time}} - <b>{{item.value.type === 1 ? "Sima":"Laktózmentes"}}</b></div>
+        <mat-divider></mat-divider>
+        <div class="pancakes">
+          <mat-chip-list>
+            <mat-chip *ngFor="let pancake of item.value.pancakes">
+              {{pancake.name}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-card *ngIf="!reservations" class="card">
+      Nincs aktív rendelés
+    </mat-card>
+  </div>
+</div>

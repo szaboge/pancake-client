@@ -3,9 +3,9 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {
-  MatButtonModule,
+  MatButtonModule, MatButtonToggleModule,
   MatCardModule,
-  MatChipsModule,
+  MatChipsModule, MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
@@ -21,10 +21,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {OrderComponent} from './order/order.component';
 import { PancakeObjectComponent } from './order/pancake-object/pancake-object.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'order', component: OrderComponent},
+  {path: 'orders', component: OrdersComponent},
   {path: '**', redirectTo: '/main'}
 ];
 
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     OrderComponent,
-    PancakeObjectComponent
+    PancakeObjectComponent,
+    OrdersComponent
   ],
   imports: [
     AngularFireAuthModule,
@@ -48,6 +51,8 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonToggleModule,
+    MatDividerModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     MatRadioModule

@@ -35,9 +35,17 @@
 
 .chooser{
   display: flex;
-  justify-content: center;
-  margin-bottom: 12px;
-  margin-top: 6px;
+  flex-direction: column;
+  margin-bottom: 20px;
+  .type-group {
+    border-radius: 1000px;
+  }
+  .type-item {
+    width: 50%;
+    ::ng-deep .mat-button-toggle-label-content {
+      line-height: 38px;
+    }
+  }
 }
 
 .left{

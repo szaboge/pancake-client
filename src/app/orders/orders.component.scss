@@ -1,0 +1,100 @@
+.main {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}
+
+.main-content {
+  max-width: 31.250rem;
+  width: 100%;
+}
+
+.start-button-container {
+  margin-top: 1.250rem;
+  display: flex;
+  justify-content: center;
+}
+
+.title-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.title-name{
+  width: 70%;
+  overflow: hidden;
+  word-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.indicator{
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.inprogress {
+  color: #ff6f00;
+  font-size: 26px;
+}
+
+.done {
+  color: #2e7d32;
+  font-size: 26px;
+  float: right;
+}
+.cancel {
+  font-size: 26px;
+
+}
+::ng-deep span.mat-content{
+  display: block;
+}
+.done-class{
+  background-color: #E8F5E9;
+}
+.in-progress-class{
+  background-color: #FFF3E0;
+}
+.pancakes{
+  padding: 8px 0;
+}
+.action-button-container{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.time{
+  margin-bottom: 6px;
+}
+
+.done-button{
+  background-color: #2e7d32;
+}
+.inprogress-button{
+  background-color: #ff6f00;
+}
+
+.db-container{
+  margin-right: 6px;
+  height: 18px;
+}
+
+.statistics{
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.done-chip{
+  background-color: #A5D6A7;
+}
+
+.inprogress-chip{
+  background-color: #FFCC80;
+}
+
+
+

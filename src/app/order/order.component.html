@@ -5,16 +5,16 @@
     </mat-card-title>
     <form class="order-form" [formGroup]="form">
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="name" name="name" placeholder="Név" formControlName="name" >
+        <input matInput [(ngModel)]="name" name="name" placeholder="Név" formControlName="name" maxlength="22">
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="room" placeholder="Szobaszám" name="room" formControlName="room">
+        <input matInput [(ngModel)]="room" placeholder="Szobaszám" name="room" formControlName="room" maxlength="20">
       </mat-form-field>
       <div class="chooser">
-        <mat-radio-group [value]="1" formControlName="type" (change)="matgroup(radioGroup.value)" #radioGroup>
-          <mat-radio-button class="left" [checked]="true" color="primary" value="1">Sima</mat-radio-button>
-          <mat-radio-button color="primary" value="2">Laktózmentes</mat-radio-button>
-        </mat-radio-group>
+        <mat-button-toggle-group class="type-group" value="1" (change)="type = $event.value">
+          <mat-button-toggle value="1" class="type-item">Sima</mat-button-toggle>
+          <mat-button-toggle value="2" class="type-item">Laktózmentes</mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
       <app-pancake-object [item]="item" *ngFor="let item of pancakes"></app-pancake-object>
       <div class="loading"><span *ngIf="pancakeloading" class="mdi mdi-loading mdi-spin loading-icon"></span></div>

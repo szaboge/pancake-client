@@ -13,8 +13,7 @@ import {Router} from '@angular/router';
 export class OrderComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(64)]),
-    room: new FormControl('', [Validators.required, Validators.maxLength(64)]),
-    type: new FormControl('')
+    room: new FormControl('', [Validators.required, Validators.maxLength(64)])
   });
 
   loading = false;
@@ -64,17 +63,17 @@ export class OrderComponent implements OnInit {
       time: moment().format('YYYY. MM. DD. HH:mm:ss'),
       pancakes: this.pancakes.filter(item => item.piece !== 0),
       done: false,
-      type: this.form.controls['type'].value
+      type: this.type
     };
-    console.log(reservations);
-    /*this.authService.db().object('reservations/' + this.authService.db().createPushId()).set(reservations)
+
+    this.authService.db().object('reservations/' + this.authService.db().createPushId()).set(reservations)
       .then(() => {
         this.router.navigate(['/main']);
         this.loading = false;
       })
       .catch(() => {
 
-      });*/
+      });
 
   }
 
