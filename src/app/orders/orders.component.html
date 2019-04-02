@@ -1,8 +1,5 @@
 <div class="main">
   <div class="main-content">
-    <button mat-flat-button color="primary" type="button" routerLink="/main">
-      Vissza
-    </button>
     <h2>Összes rendelés</h2>
     <div class="statistics">
       <mat-chip-list>
@@ -44,5 +41,8 @@
     <mat-card *ngIf="!reservations" class="card">
       Nincs aktív rendelés
     </mat-card>
+    <button mat-button color="primary" type="button" class="back-button" routerLink="/main">
+      Vissza
+    </button>
   </div>
 </div>

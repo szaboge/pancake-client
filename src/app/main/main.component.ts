@@ -32,6 +32,8 @@ export class MainComponent implements OnInit, OnDestroy {
                 this.loading = false;
               });
             });
+        } else {
+          this.authService.af().auth.signInAnonymously();
         }
       }
     );

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 
@@ -7,7 +7,7 @@ import {AuthService} from '../auth/auth.service';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent {
+export class OrdersComponent implements OnInit, OnDestroy {
 
   authSub: Subscription;
   valueChange: Subscription;
@@ -38,6 +38,9 @@ export class OrdersComponent {
   }
 
   constructor(public authService: AuthService) {
+  }
+
+  ngOnInit(): void {
     this.authSub = this.authService.af().authState.subscribe((next) => {
         if (next) {
           this.valueChange = this.authService.db().object('reservations').valueChanges().subscribe((val) => {
@@ -59,4 +62,8 @@ export class OrdersComponent {
     return count;
   }
 
+  ngOnDestroy(): void {
+    this.valueChange.unsubscribe();
+    this.authSub.unsubscribe();
+  }
 }
