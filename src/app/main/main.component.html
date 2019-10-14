@@ -19,7 +19,7 @@
             </div>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        {{item.value.time}} - <b>{{item.value.type === 1 ? "Sima" : "Laktózmentes"}}</b> - {{item.value.done ? 'Kész' : 'Folyamatban'}}
+        {{item.value.time}} - <b>{{item.value.type == 1 ? "Sima" : "Laktózmentes"}}</b> - {{item.value.done ? 'Kész' : 'Folyamatban'}}
         <div class="pancakes">
           <mat-chip-list>
             <mat-chip *ngFor="let pancake of item.value.pancakes">
