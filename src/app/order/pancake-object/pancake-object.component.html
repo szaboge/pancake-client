@@ -1,11 +1,11 @@
 <div class="main-container">
-  <div class="name-field" style="flex: 3">{{item.name}}</div>
+  <div class="name-field" style="flex: 3">{{item?.name}}</div>
   <div class="input-field">
     <button mat-icon-button (click)="minus()">
       <span class="mdi mdi-minus-circle-outline icon_size"></span>
     </button>
     <span class="room-number noselect">
-      {{item.piece}}
+      {{item?.piece}}
     </span>
     <button mat-icon-button (click)="add()">
       <span class="mdi mdi-plus-circle-outline icon_size"></span>

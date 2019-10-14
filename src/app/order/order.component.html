@@ -5,10 +5,10 @@
     </mat-card-title>
     <form class="order-form" [formGroup]="form">
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="name" name="name" placeholder="Név" formControlName="name" maxlength="22">
+        <input matInput name="name" placeholder="Név" formControlName="name" maxlength="22">
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="room" placeholder="Szobaszám" name="room" formControlName="room" maxlength="20">
+        <input matInput placeholder="Szobaszám" name="room" formControlName="room" maxlength="20">
       </mat-form-field>
       <div class="chooser">
         <mat-button-toggle-group class="type-group" value="1" (change)="type = $event.value">
@@ -16,13 +16,14 @@
           <mat-button-toggle value="2" class="type-item">Laktózmentes</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
-      <app-pancake-object [item]="item" *ngFor="let item of pancakes"></app-pancake-object>
-      <div class="loading"><span *ngIf="pancakeloading" class="mdi mdi-loading mdi-spin loading-icon"></span></div>
+      <app-pancake-object [item]="item" *ngFor="let item of pancakes | async"></app-pancake-object>
+      <div class="loading"><span *ngIf="pancakeLoading | async " class="mdi mdi-loading mdi-spin loading-icon"></span></div>
       <div class="order-button">
         <button mat-button color="primary" type="button" routerLink="/main">Vissza</button>
-        <button mat-raised-button color="primary" type="button" (click)="reserve()" [disabled]="!form.valid || !validateNumbers() || loading">
+        <button mat-raised-button color="primary" type="button" (click)="reserve()"
+                [disabled]="!form.valid || !validateNumbers() || (loading | async)">
           Rendelés
-          <span *ngIf="loading" class="mdi mdi-loading mdi-spin loading-icon"></span>
+          <span *ngIf="(loading | async)" class="mdi mdi-loading mdi-spin loading-icon"></span>
         </button>
       </div>
     </form>

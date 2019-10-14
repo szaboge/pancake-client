@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Pancake} from '../../models/pancake.model';
-
 
 @Component({
   selector: 'app-pancake-object',
   templateUrl: './pancake-object.component.html',
-  styleUrls: ['./pancake-object.component.scss']
+  styleUrls: ['./pancake-object.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PancakeObjectComponent implements OnInit {
 

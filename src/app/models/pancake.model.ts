@@ -1,4 +1,4 @@
-export class Pancake {
+export interface Pancake {
   name: string;
   piece: number;
 }

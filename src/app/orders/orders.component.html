@@ -1,21 +1,21 @@
 <div class="main">
   <div class="main-content">
-    <h2>Összes rendelés</h2>
+    <h2>Összes rendelés <span *ngIf="(loading | async)" class="mdi mdi-loading mdi-spin loading-icon"></span></h2>
     <div class="statistics">
       <mat-chip-list>
         <mat-chip>
-          Összes: {{all}}
+          Összes: {{(statistics | async)?.all}}
         </mat-chip>
         <mat-chip class="done-chip">
-          Kész: {{donee}}
+          Kész: {{(statistics | async)?.done}}
         </mat-chip>
         <mat-chip class="inprogress-chip">
-          Folyamatban: {{inprogress}}
+          Folyamatban: {{(statistics | async)?.inprogress}}
         </mat-chip>
       </mat-chip-list>
     </div>
     <mat-accordion [multi]="true">
-      <mat-expansion-panel *ngFor="let item of reservations | keyvalue;let i = index">
+      <mat-expansion-panel *ngFor="let item of (reservations | async) | keyvalue;let i = index;trackBy: trackByFn">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <div class="title-content">
@@ -38,7 +38,7 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-    <mat-card *ngIf="!reservations" class="card">
+    <mat-card *ngIf="!reservations.getValue()" class="card">
       Nincs aktív rendelés
     </mat-card>
     <button mat-button color="primary" type="button" class="back-button" routerLink="/main">

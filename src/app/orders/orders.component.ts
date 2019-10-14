@@ -1,69 +1,96 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
+import {Pancake} from '../models/pancake.model';
+import {takeUntil} from 'rxjs/operators';
+
+export interface Reservation {
+  done: boolean;
+  name: string;
+  pancakes: Array<Pancake>;
+  room: string;
+  time: string;
+  type: number;
+  userid: string;
+}
+
+export interface Reservations {
+  [key: string]: Reservation;
+}
+
+export interface Statistic {
+  all: number;
+  inprogress: number;
+  done: number;
+}
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrdersComponent implements OnInit, OnDestroy {
+  destroy = new Subject<boolean>();
+  statistics = new BehaviorSubject<Statistic>({all: 0, inprogress: 0, done: 0});
+  loading = new BehaviorSubject<boolean>(false);
+  reservations = new BehaviorSubject<Reservations>(null);
 
-  authSub: Subscription;
-  valueChange: Subscription;
-
-  all = 0;
-  inprogress = 0;
-  donee = 0;
-
-  reservations;
-
-  count_statistic(array) {
-    let t_a = 0;
-    let t_i = 0;
-    let t_d = 0;
-    for (const item in array) {
-      if (array.hasOwnProperty(item)) {
-        t_a += this.count(array[item].pancakes);
-        if (array[item].done) {
-          t_d += this.count(array[item].pancakes);
+  count_statistic() {
+    const reservations = this.reservations.getValue();
+    if (!reservations) { return; }
+    const statistics: Statistic = {all: 0, inprogress: 0, done: 0};
+    Object.keys(reservations)
+      .forEach((key: string) => {
+        statistics.all += this.count(reservations[key].pancakes);
+        if (reservations[key].done) {
+          statistics.done += this.count(reservations[key].pancakes);
         } else {
-          t_i += this.count(array[item].pancakes);
+          statistics.inprogress += this.count(reservations[key].pancakes);
         }
-      }
-    }
-    this.all = t_a;
-    this.inprogress = t_i;
-    this.donee = t_d;
+      });
+    this.statistics.next(statistics);
   }
 
   constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.authSub = this.authService.af().authState.subscribe((next) => {
+    this.loading.next(true);
+    this.authService.af().authState.pipe(takeUntil(this.destroy)).subscribe((next) => {
+        this.loading.next(true);
         if (next) {
-          this.valueChange = this.authService.db().object('reservations').valueChanges().subscribe((val) => {
-            this.reservations = val;
-            this.count_statistic(this.reservations);
-          });
+          this.authService.db().object('reservations')
+            .valueChanges()
+            .pipe(takeUntil(this.destroy))
+            .subscribe((val: Reservations) => {
+              this.reservations.next(val);
+              this.count_statistic();
+              this.loading.next(false);
+            });
         } else {
           this.authService.af().auth.signInAnonymously();
+          this.loading.next(false);
         }
       }
     );
   }
 
-  count(pancakes) {
+  count(pancakes: Array<Pancake>): number {
     let count = 0;
-    for (const item of pancakes) {
-      count += item.piece;
+    if (pancakes) {
+      pancakes.forEach((pancake: Pancake) => {
+        count += pancake.piece;
+      });
     }
     return count;
   }
 
+  trackByFn(index, item) {
+    return item.key || index;
+  }
+
   ngOnDestroy(): void {
-    this.valueChange.unsubscribe();
-    this.authSub.unsubscribe();
+    this.destroy.next(true);
   }
 }
